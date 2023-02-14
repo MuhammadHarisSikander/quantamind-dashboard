@@ -35,6 +35,7 @@ import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
 import USERLIST from '../_mock/user';
 import AddUser from './AddUser';
 import EditUser from './EditUser';
+import DeptList from './DeptList';
 
 // ----------------------------------------------------------------------
 
@@ -318,11 +319,13 @@ export default function UserPage() {
           },
         }}
       >
-        <MenuItem>
+        <MenuItem onClick={() => { window.location = '/home/' }} >
           <Iconify icon={'eva:edit-fill'} sx={{ mr: 2 }} />
-          <Button onClick={EditmodalHandleOpen}>
-            Edit
-          </Button>
+          View
+        </MenuItem>
+        <MenuItem onClick={EditmodalHandleOpen}  >
+          <Iconify icon={'eva:edit-fill'} sx={{ mr: 2 }} />
+          Edit
         </MenuItem>
 
         <MenuItem sx={{ color: 'error.main' }}>
