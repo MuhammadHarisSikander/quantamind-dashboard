@@ -32,7 +32,8 @@ export default function AccountPopover() {
   };
 
   const handleClose = () => {
-    setOpen(null);
+    // setOpen(null);
+    window.location = '/login'
   };
 
   return (

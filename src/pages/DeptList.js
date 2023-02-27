@@ -9,7 +9,7 @@ import AddDept from './AddDept';
 
 const dept = [{ name: 'Finance' }, { name: 'Human resource' }, { name: 'Front-end' }]
 
-export default function DeptList() {
+export default function DeptList({ abc }) {
     const [modalOpen, setModalOpen] = useState(false);
     const modalHandleOpen = () => setModalOpen(true);
     const modalHandleClose = () => setModalOpen(false);
@@ -22,7 +22,7 @@ export default function DeptList() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <AddDept depts={dept} closeModal={modalOpen} />
+                    <AddDept depts={dept} closeModal={modalHandleClose} />
                 </Box>
             </Modal>
             <div>

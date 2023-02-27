@@ -5,9 +5,23 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 
-export default function AddDept(depts) {
+export default function AddDept(props) {
     const [orgName, setOrgName] = useState("");
     const [compName, setCompName] = useState("");
+    const abc = false
+
+    const storeDept = () => {
+        props.depts.push(compName)
+
+    }
+    const closeModal = () => {
+        props.closeModal()
+    }
+    const mainFunc = () => {
+        storeDept()
+        closeModal()
+    }
+
     return (
         <Box>
             <div style={{ padding: '20px', display: 'flex', margin: '20px' }}>
@@ -40,8 +54,8 @@ export default function AddDept(depts) {
             </div>
             <div style={{ padding: '20px', display: 'flex', margin: '20px' }}>
                 <Stack spacing={2} direction="row" style={style}>
-                    {/* <Button onClick={() => console.log(compName)} size="large" variant="outlined">Add Department</Button> */}
-                    <Button onClick={() => depts.depts.push(compName)} size="large" variant="outlined">Add Department</Button>
+                    <Button onClick={() => mainFunc()} size="large" variant="outlined">Add Department</Button>
+                    {/* <Button onClick={() => depts.depts.push(compName)} size="large" variant="outlined">Add Department</Button> */}
                 </Stack>
             </div>
 
