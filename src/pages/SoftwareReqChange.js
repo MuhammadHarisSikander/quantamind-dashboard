@@ -9,7 +9,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AddDept from './AddDept';
 
-export default function DeptList({ abc }) {
+export default function SoftwareReqChange() {
     const navigate = useNavigate();
     const [modalOpen, setModalOpen] = useState(false);
     const [departments, setDepartments] = useState([]);

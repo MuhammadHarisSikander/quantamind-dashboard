@@ -12,6 +12,7 @@ import DashboardAppPage from './pages/DashboardAppPage';
 import DeptList from './pages/DeptList';
 import CompanyPage from './pages/CompanyPage';
 import Teams from './pages/Teams';
+import SoftwareReqChange from './pages/SoftwareReqChange';
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +29,8 @@ export default function Router() {
         { path: 'blog', element: <BlogPage /> },
         { path: 'department', element: <DeptList /> },
         { path: 'company', element: <CompanyPage /> },
-        { path: 'teams', element: <Teams /> }
+        { path: 'teams', element: <Teams /> },
+        { path: 'softwarereqchange', element: <SoftwareReqChange /> }
       ],
     },
     {

@@ -1,7 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 // @mui
 import {
   Card,
@@ -80,6 +81,45 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function UserPage() {
+  const getAllUser = () => {
+    axios.get("https://first.quantaforms.com/api/permissions", {
+      headers: {
+        Authorization: 'Bearer 3|726Kqofj6IRc9s5JNl88dQjYgFU0R9lfkYhxMMzx'
+      }
+    }
+    )
+      .then((response) => {
+        console.log(response.name);
+
+      })
+      .catch(err => {
+        console.log(err);
+        alert(err)
+      })
+  }
+  useEffect(() =>
+    axios.get("https://first.quantaforms.com/api/permissions", {
+      headers: {
+        Authorization: 'Bearer 3|726Kqofj6IRc9s5JNl88dQjYgFU0R9lfkYhxMMzx'
+      }
+    }
+    )
+      .then((response) => {
+        console.log("habber", response.data.data);
+
+      })
+      .catch(err => {
+        console.log(err);
+        alert(err)
+      })
+
+
+
+
+    , []
+
+  )
+
   const [modalOpen, setModalOpen] = useState(false);
   const modalHandleOpen = () => setModalOpen(true);
   const modalHandleClose = () => setModalOpen(false);
@@ -87,6 +127,8 @@ export default function UserPage() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const EditmodalHandleOpen = () => setEditModalOpen(true);
   const EditmodalHandleClose = () => setEditModalOpen(false);
+
+  const [users, setUsers] = useState(null);
 
   const [open, setOpen] = useState(null);
 
@@ -155,8 +197,20 @@ export default function UserPage() {
   };
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
+  // const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
+
+  const filteredUsers = [{
+    avatarUrl: "/assets/images/avatars/avatar_21.jpg",
+    company: "Considine LLC",
+    id: "ba1a1a81-3eed-4c9a-9814-ae7fa8983f30",
+    isVerified: false,
+    name: "Allison Schneider",
+    role: "UX Designer",
+    status: "active"
+  }]
+
+
 
   const isNotFound = !filteredUsers.length && !!filterName;
 
@@ -164,6 +218,16 @@ export default function UserPage() {
 
   return (
     <>
+      <Modal
+        open={modalOpen}
+        onClose={modalHandleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <AddUser />
+        </Box>
+      </Modal>
       <Modal
         open={modalOpen}
         onClose={modalHandleClose}
@@ -197,7 +261,8 @@ export default function UserPage() {
           <Typography variant="h4" gutterBottom>
             User
           </Typography>
-          <Button onClick={modalHandleOpen} variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
+          {/* <Button onClick={modalHandleOpen} variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}> */}
+          <Button onClick={() => { console.log(users) }} variant="contained" startIcon={<Iconify icon="eva:plus-fill" />}>
             New User
           </Button>
         </Stack>
@@ -219,6 +284,7 @@ export default function UserPage() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    console.log("haris>>>>", row);
                     const { id, name, role, status, company, avatarUrl, isVerified } = row;
                     const selectedUser = selected.indexOf(name) !== -1;
 
@@ -319,6 +385,10 @@ export default function UserPage() {
           },
         }}
       >
+        <MenuItem onClick={EditmodalHandleOpen} >
+          <Iconify icon={'eva:edit-fill'} sx={{ mr: 2 }} />
+          User Access
+        </MenuItem>
         <MenuItem onClick={() => { window.location = '/home/' }} >
           <Iconify icon={'eva:edit-fill'} sx={{ mr: 2 }} />
           View

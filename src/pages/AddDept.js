@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import axios from 'axios';
 
 
 export default function AddDept(props) {
@@ -18,7 +19,13 @@ export default function AddDept(props) {
         props.closeModal()
     }
     const mainFunc = () => {
-        storeDept()
+        axios.post("https://first.quantaforms.com/api/department", {
+            compName
+        }, {
+            headers: {
+                Authorization: 'Bearer 24|2xdaKmC6QnqhIqHL4k2RKzP3haotfgYzeTFx6efi'
+            }
+        })
         closeModal()
     }
 

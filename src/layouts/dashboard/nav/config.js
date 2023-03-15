@@ -1,5 +1,5 @@
 // component
-import GroupsIcon from '@mui/icons-material/Groups';
+// import GroupsIcon from '@mui/icons-material/Groups';
 import SvgColor from '../../../components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -45,6 +45,11 @@ const navConfig = [
   {
     title: 'Teams',
     path: 'teams',
+    icon: icon('ic_user'),
+  },
+  {
+    title: 'Software',
+    path: 'softwarereqchange',
     icon: icon('ic_user'),
   },
 ];
